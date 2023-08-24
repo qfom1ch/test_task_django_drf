@@ -1,5 +1,4 @@
 from django.db import models
-
 from django.utils.timezone import now
 
 
@@ -11,7 +10,7 @@ class Employee(models.Model):
     job_title = models.CharField('Должность', max_length=100, blank=True)
     salary = models.DecimalField('Оклад', default=0, max_digits=10, decimal_places=2)
     birthday = models.DateField('День рождения', blank=True, null=True)
-    department = models.ForeignKey('employee.Employee', on_delete=models.CASCADE, related_name='employees',
+    department = models.ForeignKey('department.Department', on_delete=models.CASCADE, related_name='employees',
                                    verbose_name='Департамент')
 
     class Meta:
@@ -27,8 +26,8 @@ class Employee(models.Model):
     @property
     def age(self) -> int:
         if self.birthday:
-            current_age = now().date().year - self.birthday.year
-            return current_age
+            age = now().date().year - self.birthday.year
+            return age
         return 0
 
     def __str__(self) -> str:
