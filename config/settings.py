@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rest_framework',
     'django_filters',
+    'drf_yasg',
 
     'apps.department',
     'apps.employee',

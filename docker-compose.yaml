@@ -1,0 +1,25 @@
+version: "3.0"
+services:
+  db:
+    container_name: "db"
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+  app:
+    build:
+      context: .
+    env_file:
+      - .env.example
+    container_name: "app"
+    command: >
+      sh -c "python3 manage.py migrate 
+      && python3 manage.py loaddata db_fixtures.json
+      && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - 8003:8000
+    depends_on:
+      - db
+
