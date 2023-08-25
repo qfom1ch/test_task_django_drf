@@ -28,14 +28,14 @@ schema_view = get_schema_view(
         contact=openapi.Contact(email="fomichev.ser.v@gmail.com"),
     ),
     public=True,
-    permission_classes=[permissions.IsAuthenticated],
+    permission_classes=[permissions.AllowAny],
 )
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/department/', include('apps.department.urls', namespace='department')),
-    path('api/v1/employee/', include('apps.employee.urls', namespace='employee')),
+    path('api/v1/department/', include('apps.department.urls', namespace='api_department')),
+    path('api/v1/employee/', include('apps.employee.urls', namespace='api_employee')),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
 

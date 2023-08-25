@@ -15,8 +15,10 @@ services:
       - .env.example
     container_name: "app"
     command: >
-      sh -c "python3 manage.py migrate 
+      sh -c "python3 manage.py migrate
+      && sleep 2s
       && python3 manage.py loaddata db_fixtures.json
+      && sleep 2s
       && python manage.py runserver 0.0.0.0:8000"
     ports:
       - 8003:8000
